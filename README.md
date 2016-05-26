@@ -11,7 +11,7 @@ Github Pages: [https://cjey.github.io](https://cjey.github.io)
 ```Bash
 npm install
 
-git clone https://github.com/CJey/hexo-theme-next.git themes/next
+git clone git@github.com:CJey/hexo-theme-next.git themes/next
 ```
 
 ## Startup
@@ -23,5 +23,5 @@ hexo server
 OR
 
 ```Bash
-hexo generate # then serve static files in director "public" by youself
+hexo generate # then serve static files in directory "public" by youself
 ```
