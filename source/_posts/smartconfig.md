@@ -2,26 +2,31 @@
 title: Smart Config 技术原理
 date: 2016-05-27 23:35:28
 tags:
+  - 网络
+  - SmartConfig
+  - Wifi
+  - 通信
+  - 有趣
+categories:
+  - 纸上谈兵
 ---
 
-## Summary
+偶尔见识了一台无线监控设备的网络接入方式, 从而了解到了Smart Config技术
+本文在于阐述我对Smart Config这一技术的理解
+
+## 简述
 
 简单来说, 这是一种让你可以在没有和其他设备(支持SmartConfig技术)建立任何性质的通讯链路的情况下, 配置该设备接入wifi网络
 
 虚构一个实际场景的话, 会是这样:
 
 你购买了一个带有wifi的摄像头, 不过这个摄像头没有usb, 没有以太网, 没有蓝牙, 没有nfc, gsm就更不可能了, 只有wifi, 那么问题来了:
-
 你如何配置这个摄像头接入你家的wifi?
-
 乍一想, 没有数据链路, 如何进行数据交换?
-
 对的, SmartConfig就是用在这种场景下的, 如果这个摄像头的wifi支持SmartConfig技术, 那么你只需这样几个步骤
 
 1. 摄像头插上电源
-
 2. 安装制造商提供的手机app(应用无需任何特殊权限, 只需要手机当前是接入wifi的)
-
 3. 在摄像头附近打开app, 输入你家wifi的密码, 点击确认, 稍等片刻, 不出意外的话, 摄像头已经接入你家wifi了
 
 这项技术由德州仪器提出, 并且应用在自己的CC3000系列芯片上. 不过, 从原理上来说, 支持混杂模式的wifi芯片都可以应用该技术
@@ -33,17 +38,14 @@ tags:
 首先, 你可能会联想到是不是这个app控制了手机, 让手机主动接入摄像头的wifi网络, 然后交换数据. 这确实是一个行得通的办法, 但是却不实用, 控制操作系统更换当前的网络连接是敏感操作, 普通的app没这个权限, 那么就需要用户参与其中, 对于一般的用户而言, 这样的流程就显得复杂且难以理解了
 
 这样看来, 摄像头并没有和你控制的任何一个设备建立任何性质的连接
-
 一般来说, 我们潜意识里会默认通讯都是双向的, 以这个习惯来看待SmartConfig似乎觉得匪夷所思
 
 其实, 在这种场景下, 我们只需要**能够把wifi的名称和密码告诉摄像头**就行了, 摄像头有没有回馈并不重要
 
 顺着这个思路, 我们发现可以这么做, 手机app上生成一个包含wifi名称和密码的二维码, 然后放置在摄像头前, 摄像头只要识别了二维码自然就可以接入wifi
-
 但是, 扫二维码的方式依赖视频信号输入, 并不是通用的手段(因为现实场景中的设备并不都是摄像头), 而且场景里也没有采用这种做法
 
 这么分析下来, 传播wifi信息的渠道只可能是wifi本身了
-
 摄像头尚未接入wifi, 况且wifi也是加密的, app并没有能力控制wifi的底层通讯, app又是如何将信息成功外泄给摄像头的?
 
 ## 共识
@@ -51,18 +53,16 @@ tags:
 理解SmartConfig原理前需要说两个我总结的观点, 作为下文的共识
 
 其一
-{% blockquote CJey %}
-无线数据的传播形式必定是广播
-{% endblockquote %}
+>我认为
+>无线数据的传播形式必定是广播
 
 至少目前是这样, 因为我所知道的能做到点对点的无线传输只有量子隐形传输, 可惜还在实验室中
 
 既然是广播, 那么必然可以被监听, 就像一个酒吧里有两个中国人和两个俄罗斯人, 中国人和中国人说话, 俄罗斯人听得到, 只不过听不懂, 反之亦然
 
 其二
-{% blockquote CJey %}
-任何可控的模式都可以被用于编码, 用于数据交换
-{% endblockquote %}
+>我认为
+>任何可控的模式都可以被用于编码, 用于数据交换
 
 当前wifi应用的几种主流加密方式都存在一个特点, 明文的长度和加密后的密文长度之间是线性关系
 
@@ -154,9 +154,6 @@ AP to Station
 ## 参考
 
 [SmartConfig的TI官方wiki](http://processors.wiki.ti.com/index.php/CC3000_Smart_Config)
-
 [SmartConfig的TI官方介绍](http://www.ti.com/tool/smartconfig)
-
 [CC3000 Smart Config - transmitting SSID and keyphrase](http://depletionregion.blogspot.ch/2013/10/cc3000-smart-config-transmitting-ssid.html)
-
 [How does TI CC3000 wifi smart config work?](http://electronics.stackexchange.com/questions/61704/how-does-ti-cc3000-wifi-smart-config-work)
