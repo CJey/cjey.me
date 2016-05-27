@@ -1,6 +1,6 @@
 ---
 title: Smart Config 技术原理
-date: 2016-05-27 23:35:28
+date: 2015-06-15 02:39:57
 tags:
   - 网络
   - SmartConfig
