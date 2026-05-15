@@ -79,6 +79,12 @@ deploy:
 avatar: /images/avatar.jpg
 favicon: /favicon.ico
 
+# hexo-renderer-marked: resolve relative image paths in posts
+# against the post's asset folder (requires post_asset_folder: true).
+marked:
+  prependRoot: true
+  postAsset: true
+
 # RSS feed (hexo-generator-feed)
 feed:
   type: atom
