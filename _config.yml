@@ -17,7 +17,6 @@ url: https://cjey.me
 root: /
 permalink: posts/:title/
 permalink_defaults:
-  lang: en
 
 # Directory
 source_dir: source
@@ -79,3 +78,15 @@ deploy:
 
 avatar: /images/avatar.jpg
 favicon: /favicon.ico
+
+# RSS feed (hexo-generator-feed)
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  order_by: -date
+
+# Sitemap (hexo-generator-sitemap)
+sitemap:
+  path: sitemap.xml
+  rel: false
